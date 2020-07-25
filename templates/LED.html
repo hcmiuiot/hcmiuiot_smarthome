@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Control LED!
+        </title>
+        <link rel="stylesheet" type="text/css" href="{{  url_for('static', filename= 'stylesheet.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="term">
+            <img src="{{  url_for('static', filename= 'logo.png') }}" alt="logo" width="300" height="300"/>
+            <br/>
+            <br/>
+            <br/>
+            <div id="buttons">
+                <button type="button" class="btn btn-success" onclick="turnOn()">Turn On</button>
+                <button type="button" class="btn btn-danger" onclick="turnOff()">Turn Off</button>
+            </div>
+            <br/>
+            <div id="detail"><div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+        <script>
+            const client = io();
+
+            client.on("connect", () =>
+            {
+                client.emit('connection', 'New client connected...')
+                console.log("Connected to server!");
+                client.on("lightOn", (data) => {
+                    console.log(data);
+                });
+                client.on("lightOff", (data) => {
+                    console.log(data);
+                });
+            })
+
+            function turnOn() {
+                client.emit('turn-on', {data: 'TurnOnTheLight'});
+                console.log("TurnOnTheLight");
+            }
+
+            function turnOff() {
+                client.emit('turn-off', {data: 'TurnOffTheLight'});
+                console.log("TurnOffTheLight");
+            }
+        </script>
+    </body>
+</html>
