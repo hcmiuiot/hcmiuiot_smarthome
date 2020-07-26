@@ -10,43 +10,58 @@
 <body>
 <div class ="container" >
     <div class ="main-container">
-            <div class ="left">
+        <div class ="left">
                 <div class = "one star-five ">
                     <div style ="width: 20px; height: 30px; background-color: red;">LIGHT</div>
                     <label class = "menu-property">1</label>
                 </div>
                 <div class = "two star-five">
                     <label class ="menu-property">2</label>
-            </div>
+                </div>
         </div>
         <div class = "right">
-            <div class="light-on d-none">
-                <div class = "img">
-                    <img class="l-auto" src="../static/img/bóng2.png" alt="">
+            <div class="star">
+                <div class="light ">
+                    <div class = "img">
+                        <img class="l-auto" src="../static/img/bóng2.png" alt="">
+                    </div>
+                    <div class = "bottom">
+                        <div class ="comon-of-bottom" style="margin-top: 25px">
+                            <button type="button" style ="margin: 15px; margin-left: 60px;" id="onButton" class="btn btn-success">Turn On</button>
+                            <button type="button" style= "margin-left: 80px;" id="offButton" class="btn btn-danger">Turn Off</button>
+                        </div>
+                    </div>
                 </div>
-                <div class = "bottom">
-                    <div class ="comon-of-bottom" style="margin-top: 25px">
-                        <button type="button" style ="margin: 15px; margin-left: 60px;" id="onButton" class="btn btn-success">Turn On</button>
-                        <button type="button" style= "margin-left: 80px;" id="offButton" class="btn btn-danger">Turn Off</button>
+                <div class="light d-none">
+                    <div class = "img">
+                        <img class="l-auto" src="../static/img/bóng1.png" alt="">
+                    </div>
+                    <div class = "bottom">
+                        <div class ="comon-of-bottom" style="margin-top: 25px">
+                            <button type="button" style ="margin: 15px; margin-left: 60px;" id="onButton" class="btn btn-success">Turn On</button>
+                            <button type="button" style= "margin-left: 80px;" id="offButton" class="btn btn-danger">Turn Off</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="light-off">
-                <div class = "img">
-                    <img class="l-auto" src="../static/img/bóng1.png" alt="">
-                </div>
-                <div class = "bottom">
-                    <div class ="comon-of-bottom" style="margin-top: 25px">
-                        <button type="button" style ="margin: 15px; margin-left: 60px;" id="onButton" class="btn btn-success">Turn On</button>
-                        <button type="button" style= "margin-left: 80px;" id="offButton" class="btn btn-danger">Turn Off</button>
+            <div class="star d-none">
+                <div class="temp ">
+                    <div class = "img">
+                        <img class="l-auto" src="../static/img/bg1.jpg" alt="">
                     </div>
+                  <div class = "bottom">
+                    <div class ="comon-of-bottom" style="margin-top: 25px">
+                        <div>
+                            <label>nhiệt độ</label>
+                        </div>
+                    </div>
+                   </div>
+                </div>
             </div>
-        </div>
-
         </div>
     </div>
 </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
