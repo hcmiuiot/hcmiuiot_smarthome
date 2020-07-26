@@ -20,7 +20,7 @@
                 </div>
         </div>
         <div class = "right">
-            <div class="star">
+            <div class="star" id="star1">
                 <div class="light ">
                     <div class = "img">
                         <img id="myImage" class="l-auto " src="../static/img/bóng1.png" alt="">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="star hidden ">
+            <div class="star d-none" id="star2">
                 <div class="temp ">
                     <div class = "img">
                         <img class="l-auto" style="padding-left: 0px; padding-top: 50px;" src="../static/img/high_temperature_moulds_2.png" alt="">
@@ -62,7 +62,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="../static/javascript/handleDesign.js"></script>
 <script>
-
+    var starFive = document.getElementsByClassName("star-five");
+    var star = document.getElementsByClassName("star");
+    starFive[0].onclick = () => {
+        star[1].className = "star d-none";
+        star[0].className = "star"; 
+    }
+    starFive[1].onclick = () => {
+        star[0].className = "star d-none";
+        star[1].className = "star"; 
+    }
 </script>
 </body>
 </html>
