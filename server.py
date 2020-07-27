@@ -14,7 +14,7 @@ print("Server is starting at port 5000...")
 # a route where we will display a welcome message via an HTML template
 @app.route("/", methods = ['GET', 'POST'])
 def hello():
-    return render_template('LED.html')
+    return render_template('index.html')
 
 # functions to control the lights
 def onLight():
