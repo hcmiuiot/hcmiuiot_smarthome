@@ -93,12 +93,14 @@ function turnOff() {
 function On() {
     document.getElementById("on-btn").disabled = true;
     document.getElementById("off-btn").disabled = false;
+    document.getElementById('myImage').src='../static/img/bóng2.png'
     console.log("On");
 }
 
 function Off() {
     document.getElementById("on-btn").disabled = false;
     document.getElementById("off-btn").disabled = true;
+    document.getElementById('myImage').src='../static/img/bóng1.png'
     console.log("Off");
 }
 </script>
