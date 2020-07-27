@@ -57,10 +57,51 @@
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
+<!-- add socketio -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="../static/javascript/handleDesign.js"></script>
 <script src="../static/javascript/design.js"></script>
+<script>
+    const client = io();
+
+client.on("connect", () =>
+{
+    client.emit('connection', 'New client connected...')
+    console.log("Connected to server!");
+    client.on("lightOn", (data) => {
+        console.log(data.data);
+        On();
+    });
+    client.on("lightOff", (data) => {
+        console.log(data.data);
+        Off();
+    });
+});
+
+function turnOn() {
+    client.emit('turn-on', {data: 'TurnOnTheLight'});
+    console.log("TurnOnTheLight");
+}
+
+function turnOff() {
+    client.emit('turn-off', {data: 'TurnOffTheLight'});
+    console.log("TurnOffTheLight");
+}
+
+function On() {
+    document.getElementById("on-btn").disabled = true;
+    document.getElementById("off-btn").disabled = false;
+    console.log("On");
+}
+
+function Off() {
+    document.getElementById("on-btn").disabled = false;
+    document.getElementById("off-btn").disabled = true;
+    console.log("Off");
+}
+</script>
+</script>
 </body>
 </html>
