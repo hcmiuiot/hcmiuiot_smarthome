@@ -1,5 +1,7 @@
 from flask import Flask, render_template        #install flask + flask-socketio
 from flask_socketio import SocketIO
+import time
+import RPi.GPIO as GPIO 
 
 # creates a Flask application, named app
 app = Flask(__name__)
@@ -17,12 +19,16 @@ def hello():
     return render_template('index.html')
 
 # functions to control the lights
+GPIO.setwarnings(False) 
+LED_PIN = 18
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(LED_PIN, GPIO.OUT)
 def onLight():
-    print("Code turn on here!")
+    GPIO.output(LED_PIN, GPIO.HIGH)
     socketio.emit("lightOn", {'data': 'From server: The light: On'})
 
 def offLight():
-    print("Code turn off here!")
+    GPIO.outpput(LED_PIN, GPIO.LOW)
     socketio.emit("lightOff", {'data': 'From server: The light: Off'})
 
 # socket on connection
