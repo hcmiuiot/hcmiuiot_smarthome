@@ -69,6 +69,9 @@ def read_temp():
 def connection(data):
     if (status != 0):
         socketio.emit(f"light{status}", {'data': f'From server: The light: {status}'})
+    while True:
+        tempC, tempF = read_temp()
+        socketio.emit("temp", {"tempC": "{:.2f}".format(tempC)}, {"tempF": "{:.2f}".format(tempF)})
     print(data)
 
 # socketio - functions to control light
@@ -81,13 +84,6 @@ def turnOn(data):
 def turnOn(data):
     print(data)
     offLight()            #put the def to control the light here!
-
-@socketio.on('temp')
-def temp(data):
-    print("Socket temperature opened")
-    while True:
-        tempC, tempF = read_temp()
-        socketio.emit("temp", {"tempC": "{:.2f}".format(tempC)}, {"tempF": "{:.2f}".format(tempF)})
 
 # run the application ** socketio.run(app)
 if __name__ == "__main__":
