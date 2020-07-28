@@ -16,30 +16,41 @@ print("Server is starting at port 5000...")
 def hello():
     return render_template('LED.html')
 
-# functions to control the lights
-def onLight():
-    print("Code turn on here!")
-    socketio.emit("lightOn", {'data': 'From server: The light: On'})
-
-def offLight():
-    print("Code turn off here!")
-    socketio.emit("lightOff", {'data': 'From server: The light: Off'})
-
 # socket on connection
 @socketio.on('connection')
 def connection(data):
     print(data)
 
-# socketio - functions to control light
-@socketio.on('turn-on')
-def turnOn(data):
-    print(data)
-    onLight()             #put the def to control the light here!
+# functions to control the lights
+    def onLight():
+        print("Code turn on here!")
+        socketio.emit("lightOn", {'data': 'On'})
 
-@socketio.on('turn-off')
-def turnOn(data):
-    print(data)
-    offLight()            #put the def to control the light here!
+    def offLight():
+        print("Code turn off here!")
+        socketio.emit("lightOff", {'data': 'Off'})
+
+    # socketio - functions to control light
+    @socketio.on('turn-on')
+    def turnOn(data):
+        print(data)
+        onLight()             #put the def to control the light here!
+
+    @socketio.on('turn-off')
+    def turnOff(data):
+        print(data)
+        offLight()            #put the def to control the light here!
+
+# function to send the temperature information
+@socketio.on('temp-inf')
+    def sendTempInf('data'):
+        print(data)
+        temp = getTempInf()
+        socketio.emit('temp-inf', {'data': temp})
+
+# ras func
+    def getTempInf():
+        print('Get temp inf here')
 
 # run the application ** socketio.run(app)
 if __name__ == "__main__":

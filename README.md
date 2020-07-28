@@ -1,2 +1,2 @@
-# hcmiuiot_smarthome
-Controlling led and temperature via a website by Raspberry pi
+# simple_smarthome
+Turn on/off the light bulb and graph the temperature in the room.

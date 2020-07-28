@@ -14,8 +14,8 @@
             <br/>
             <br/>
             <div id="buttons">
-                <button type="button" class="btn btn-success" onclick="turnOn()">Turn On</button>
-                <button type="button" class="btn btn-danger" onclick="turnOff()">Turn Off</button>
+                <button type="button" id="on-btn" class="btn btn-success" onclick="turnOn()">Turn On</button>
+                <button type="button" id="off-btn" class="btn btn-danger" onclick="turnOff()">Turn Off</button>
             </div>
             <br/>
             <div id="detail"><div>
@@ -31,9 +31,11 @@
                 console.log("Connected to server!");
                 client.on("lightOn", (data) => {
                     console.log(data);
+                    On();
                 });
                 client.on("lightOff", (data) => {
                     console.log(data);
+                    Off();
                 });
             })
 
@@ -46,6 +48,20 @@
                 client.emit('turn-off', {data: 'TurnOffTheLight'});
                 console.log("TurnOffTheLight");
             }
+
+            // New func
+            function On() {
+                document.getElementById("on-btn").disabled = true;
+                document.getElementById("off-btn").disabled = false;
+                console.log("On");
+            }
+
+            function Off() {
+                document.getElementById("on-btn").disabled = false;
+                document.getElementById("off-btn").disabled = true;
+                console.log("Off");
+            }
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>
 </html>
