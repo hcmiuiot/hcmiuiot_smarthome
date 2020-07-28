@@ -41,8 +41,8 @@
                   <div class = "bottom">
                     <div class ="comon-of-bottom" style="margin-top: 25px">
                         <div>
-                            <label class="text-center text-warning bg-success"><h2 id="tempInfor">nhiệt độ </h2></label>
-                            <div class="temp-content text-info bg-light text-center"> <h2>49 độ C </h2></div>
+                            <label class="text-center text-warning bg-success"><h2>nhiệt độ </h2></label>
+                            <div class="temp-content text-info bg-light text-center"> <h2 id="tempInformation">49 độ C </h2></div>
                         </div>
                     </div>
                    </div>
@@ -82,8 +82,7 @@ client.on("connect", () =>
         data = JSON.parse(data);
         var tempC = data.tempC;
         var tempF = data.tempF;
-        console.log(tempC, tempF);
-        document.querySelector("#tempInfor").innerHTML = `${tempC}°C = ${tempF}°F`;
+        document.querySelector("#tempInformation").innerHTML = `${tempC}°C = ${tempF}°F`;
     })
 });
 
