@@ -25,11 +25,13 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LED_PIN, GPIO.OUT)
 status = 0
 def onLight():
+    global status
     GPIO.output(LED_PIN, GPIO.HIGH)
     status = "On"
     socketio.emit("lightOn", {'data': 'From server: The light: On'})
 
 def offLight():
+    global status
     GPIO.output(LED_PIN, GPIO.LOW)
     status = "Off"
     socketio.emit("lightOff", {'data': 'From server: The light: Off'})
