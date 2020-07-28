@@ -82,6 +82,7 @@ client.on("connect", () =>
         data = JSON.parse(data);
         var tempC = data.tempC;
         var tempF = data.tempF;
+        console.log(tempC, tempF);
         document.querySelector("#tempInfor").innerHTML = `${tempC}°C = ${tempF}°F`;
     })
 });

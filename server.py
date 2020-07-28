@@ -83,10 +83,11 @@ def read_temp():
 
 @socketio.on('temp')
 def temp(data):
+    print("Socket temperature opened")
     while True:
         tempC, tempF = read_temp()
         socketio.emit("temp", {"tempC": "{:.2f}".format(tempC)}, {"tempF": "{:.2f}".format(tempF)})
-        
+
 # run the application ** socketio.run(app)
 if __name__ == "__main__":
     socketio.run(app)
