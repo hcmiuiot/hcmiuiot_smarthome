@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../static/javascript/plotly.min.js"></script>
 </head>
 <body>
 <div class ="container" >
@@ -42,10 +43,10 @@
                     <div class ="comon-of-bottom" style="margin-top: 25px">
                         <div>
                             <div class ="row">
-                                <div class="col-4">
+                                <div class="col-5">
                                     <label class="text-center text-warning bg-success"><h2>nhiệt độ </h2></label>
                                 </div>
-                                <div class="col-8">
+                                <div class="col-7">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
                                         Open Graph
@@ -61,7 +62,13 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                ...
+                                                    <!-- Chart here -->
+                                                    <div
+                                                        class="wrapper"
+                                                        style="margin: 0; padding: 0;"
+                                                    >
+                                                        <div id="chart"></div>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,7 +100,8 @@
 <script src="../static/javascript/design.js"></script>
 <script>
     const client = io();
-
+    var dataTempC = 0;
+    var dataTempF = 0;
     client.on("connect", () =>
     {
         client.emit('connection', 'New client connected...')
@@ -109,7 +117,9 @@
         client.on("temp", (data) => {
             data = JSON.parse(data);
             var tempC = data.tempC;
+            dataTempC = tempC;
             var tempF = data.tempF;
+            dataTempF = tempF;
             document.querySelector("#tempInformation").innerHTML = `${tempC}°C = ${tempF}°F`;
         })
     });
@@ -137,6 +147,49 @@
         document.getElementById('myImage').src='../static/img/bóng1.png'
         console.log("Off");
     }
+
+    // Script for chart
+    function getDataC() {
+        return dataTempC;
+    }
+    function getDataF() {
+        return dataTempF;
+    }
+
+    Plotly.plot(
+        'chart',
+        [
+            {
+                y: [getDataC()],
+                type: 'line',
+                name: '°C',
+            },
+            {
+                y: [getDataF()],
+                type: 'line',
+                name: '°F',
+            },
+        ]
+    );
+
+    var cnt = 0;
+
+    setInterval(function () {
+        Plotly.extendTraces(
+            'chart',
+            { y: [[getDataC()], [getDataF()]] },
+            [0, 1]
+        );
+        cnt++;
+        if (cnt > 7) {
+            Plotly.relayout('chart', {
+                xaxis: {
+                    range: [cnt - 7, cnt],
+                },
+            });
+        }
+    }, 5000);
+
 </script>
 </script>
 </body>
