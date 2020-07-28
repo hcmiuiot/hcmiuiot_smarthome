@@ -41,7 +41,36 @@
                   <div class = "bottom">
                     <div class ="comon-of-bottom" style="margin-top: 25px">
                         <div>
-                            <label class="text-center text-warning bg-success"><h2>nhiệt độ </h2></label>
+                            <div class ="row">
+                                <div class="col-6">
+                                    <label class="text-center text-warning bg-success"><h2>nhiệt độ </h2></label>
+                                </div>
+                                <div class="col-6">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                        Open Graph
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Temperatures Graph</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="temp-content text-info bg-light text-center"> <h2 id="tempInformation">49 độ C </h2></div>
                         </div>
                     </div>
@@ -65,49 +94,49 @@
 <script>
     const client = io();
 
-client.on("connect", () =>
-{
-    client.emit('connection', 'New client connected...')
-    console.log("Connected to server!");
-    client.on("lightOn", (data) => {
-        console.log(data.data);
-        On();
+    client.on("connect", () =>
+    {
+        client.emit('connection', 'New client connected...')
+        console.log("Connected to server!");
+        client.on("lightOn", (data) => {
+            console.log(data.data);
+            On();
+        });
+        client.on("lightOff", (data) => {
+            console.log(data.data);
+            Off();
+        });
+        client.on("temp", (data) => {
+            data = JSON.parse(data);
+            var tempC = data.tempC;
+            var tempF = data.tempF;
+            document.querySelector("#tempInformation").innerHTML = `${tempC}°C = ${tempF}°F`;
+        })
     });
-    client.on("lightOff", (data) => {
-        console.log(data.data);
-        Off();
-    });
-    client.on("temp", (data) => {
-        data = JSON.parse(data);
-        var tempC = data.tempC;
-        var tempF = data.tempF;
-        document.querySelector("#tempInformation").innerHTML = `${tempC}°C = ${tempF}°F`;
-    })
-});
 
-function turnOn() {
-    client.emit('turn-on', {data: 'TurnOnTheLight'});
-    console.log("TurnOnTheLight");
-}
+    function turnOn() {
+        client.emit('turn-on', {data: 'TurnOnTheLight'});
+        console.log("TurnOnTheLight");
+    }
 
-function turnOff() {
-    client.emit('turn-off', {data: 'TurnOffTheLight'});
-    console.log("TurnOffTheLight");
-}
+    function turnOff() {
+        client.emit('turn-off', {data: 'TurnOffTheLight'});
+        console.log("TurnOffTheLight");
+    }
 
-function On() {
-    document.getElementById("on-btn").disabled = true;
-    document.getElementById("off-btn").disabled = false;
-    document.getElementById('myImage').src='../static/img/bóng2.png'
-    console.log("On");
-}
+    function On() {
+        document.getElementById("on-btn").disabled = true;
+        document.getElementById("off-btn").disabled = false;
+        document.getElementById('myImage').src='../static/img/bóng2.png'
+        console.log("On");
+    }
 
-function Off() {
-    document.getElementById("on-btn").disabled = false;
-    document.getElementById("off-btn").disabled = true;
-    document.getElementById('myImage').src='../static/img/bóng1.png'
-    console.log("Off");
-}
+    function Off() {
+        document.getElementById("on-btn").disabled = false;
+        document.getElementById("off-btn").disabled = true;
+        document.getElementById('myImage').src='../static/img/bóng1.png'
+        console.log("Off");
+    }
 </script>
 </script>
 </body>
