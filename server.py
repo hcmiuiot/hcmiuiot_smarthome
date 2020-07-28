@@ -38,23 +38,6 @@ def offLight():
     status = "Off"
     socketio.emit("lightOff", {'data': 'From server: The light: Off'})
 
-# socket on connection
-@socketio.on('connection')
-def connection(data):
-    if (status != 0):
-        socketio.emit(f"light{status}", {'data': f'From server: The light: {status}'})
-    print(data)
-
-# socketio - functions to control light
-@socketio.on('turn-on')
-def turnOn(data):
-    print(data)
-    onLight()             #put the def to control the light here!
-
-@socketio.on('turn-off')
-def turnOn(data):
-    print(data)
-    offLight()            #put the def to control the light here!
 
 # Function for temperature sensor
 os.system('modprobe w1-gpio')
@@ -80,6 +63,24 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c, temp_f
+
+# socket on connection
+@socketio.on('connection')
+def connection(data):
+    if (status != 0):
+        socketio.emit(f"light{status}", {'data': f'From server: The light: {status}'})
+    print(data)
+
+# socketio - functions to control light
+@socketio.on('turn-on')
+def turnOn(data):
+    print(data)
+    onLight()             #put the def to control the light here!
+
+@socketio.on('turn-off')
+def turnOn(data):
+    print(data)
+    offLight()            #put the def to control the light here!
 
 @socketio.on('temp')
 def temp(data):
