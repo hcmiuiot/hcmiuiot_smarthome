@@ -28,7 +28,7 @@ def onLight():
     socketio.emit("lightOn", {'data': 'From server: The light: On'})
 
 def offLight():
-    GPIO.outpput(LED_PIN, GPIO.LOW)
+    GPIO.output(LED_PIN, GPIO.LOW)
     socketio.emit("lightOff", {'data': 'From server: The light: Off'})
 
 # socket on connection
