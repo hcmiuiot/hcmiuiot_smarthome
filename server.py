@@ -1,5 +1,6 @@
 from flask import Flask, render_template        #install flask + flask-socketio
 from flask_socketio import SocketIO
+import json
 import time
 import RPi.GPIO as GPIO 
 import os
