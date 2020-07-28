@@ -23,17 +23,22 @@ GPIO.setwarnings(False)
 LED_PIN = 18
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(LED_PIN, GPIO.OUT)
+status = 0
 def onLight():
     GPIO.output(LED_PIN, GPIO.HIGH)
+    status = "On"
     socketio.emit("lightOn", {'data': 'From server: The light: On'})
 
 def offLight():
     GPIO.output(LED_PIN, GPIO.LOW)
+    status = "Off"
     socketio.emit("lightOff", {'data': 'From server: The light: Off'})
 
 # socket on connection
 @socketio.on('connection')
 def connection(data):
+    if (status != 0):
+        socketio.emit(f"light{status}", {'data': f'From server: The light: {status}'})
     print(data)
 
 # socketio - functions to control light
