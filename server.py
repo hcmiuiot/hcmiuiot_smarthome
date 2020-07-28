@@ -72,7 +72,7 @@ def connection(data):
         socketio.emit(f"light{status}", {'data': f'From server: The light: {status}'})
     while True:
         tempC, tempF = read_temp()
-        socketio.emit("temp", json.dumps({"tempC": "{:.2f}".format(tempC)}, {"tempF": "{:.2f}".format(tempF)}))
+        socketio.emit("temp", json.dumps({"tempC": "{:.2f}".format(tempC), "tempF": "{:.2f}".format(tempF)}))
     print(data)
 
 # socketio - functions to control light
